@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musica</title>
+    <style>
+        body {
+            background-color: #87ccc1;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            width: 50%;
+            margin: auto;
+            margin-top: 30px;
+        }
+        table {
+            border: 3px solid #cca633;
+            padding: 20px 50px;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #edf797;
+        }
+        .link-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .link-container a {
+            display: block;
+            margin: 10px 0;
+            font-size: 20px;
+            color: #000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido</h1>
+    <div class="link-container">
+        <a href="agregar_artista.html">Agregar Artista</a>
+        <a href="agregar_cancion.html">Agregar Canción</a>
+    </div>
+
+    <!-- Agrega el formulario de registro de usuarios -->
+    <h1>Formulario de registro</h1>
+    <form action="formulario.php" name="" method="POST">
+        <table border="0" align="center">
+            <tr>
+                <td>Nombre de usuario:</td>
+                <td>
+                    <label for="user"></label>
+                    <input type="text" name="usuario" id="user" required />
+                </td>
+            </tr>
+            <tr>
+                <td>Contraseña:</td>
+                <td>
+                    <label for="password"></label>
+                    <input type="password" name="contrasena" id="password" required />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Registrar" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <!-- Agrega el código PHP para guardar el artista -->
+    <?php 
+        $user = "root";
+        $pass = "";
+        $host = "localhost";
+
+        // Conexión a la base de datos
+        $connection = mysqli_connect($host, $user, $pass);
+
+        if (!$connection) {
+            die("No se ha podido conectar con el servidor: " . mysqli_connect_error());
+        }
+
+        $datab = "artistas";
+        $db = mysqli_select_db($connection, $datab);
+
+        if (!$db) {
+            die("No se ha encontrado la base de datos: " . mysqli_error($connection));
+        }
+
+        $nombre = $_POST['nombre'];
+        $artista = $_POST['artista'];
+        $genero = $_POST['genero'];
+        $descripcion = $_POST['descripcion'];
+
+        $instruccion_SQL = "INSERT INTO canciones (nombre, artista, genero, descripcion) VALUES ('$nombre', '$artista', '$genero', '$descripcion')";
+        $resultado = mysqli_query($connection, $instruccion_SQL);
+
+        if (!$resultado) {
+            die("Error al insertar los datos: " . mysqli_error($connection));
+        }
+
+        echo "Canción agregada exitosamente";
+        mysqli_close($connection);
+
+        echo '<a href="agregar_cancion.html"> Agregar otra canción</a><br>';
+        echo '<a href="index.html"> Volver al inicio</a>';
+    ?>
+</body>
+</html>

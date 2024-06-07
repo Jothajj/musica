@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Artista</title>
+    <style>
+        body {
+            background-color: #87ccc1;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            width: 50%;
+            margin: auto;
+            margin-top: 30px;
+        }
+        table {
+            border: 3px solid #cca633;
+            padding: 20px 50px;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #edf797;
+        }
+    </style>
+</head>
+<body>
+    <h1>Agregar Artista</h1>
+    <form action="guardar_artista.php" method="POST">
+        <table border="0" align="center">
+            <tr>
+                <td>Nombre:</td>
+                <td><input type="text" name="nombre" required></td>
+            </tr>
+            <tr>
+                <td>Descripción:</td>
+                <td><textarea name="descripcion" required></textarea></td>
+            </tr>
+            <tr>
+                <td>Género:</td>
+                <td><input type="text" name="genero" required></td>
+            </tr>
+            <tr>
+                <td>Álbum:</td>
+                <td><input type="text" name="album" required></td>
+            </tr>
+        </table>
+        <div style="text-align:center; margin-top:20px;">
+            <input type="submit" value="Agregar Artista">
+        </div>
+    </form>
+</body>
+</html>
